@@ -1,0 +1,20 @@
+# Rust 版本，使用 2024 版本
+edition = "2024"
+# 每行最大宽度，超过此宽度会自动换行
+max_width = 100
+# 是否使用硬制表符（Tab），false 表示使用空格
+hard_tabs = false
+# 每个 Tab 对应的空格数
+tab_spaces = 4
+# 换行符风格，Unix 风格使用 LF (\n)
+newline_style = "Unix"
+# 小代码块格式化的启发式设置
+use_small_heuristics = "Default"
+# 是否自动重新排序 imports 语句
+reorder_imports = true
+# 是否自动重新排序模块声明
+reorder_modules = true
+# 是否使用字段初始化简写（如 Foo { x } 代替 Foo { x: x }）
+use_field_init_shorthand = true
+# 是否使用 try! 宏简写（? 操作符）
+use_try_shorthand = false

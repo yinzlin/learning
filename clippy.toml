@@ -1,0 +1,26 @@
+# 最低支持的 Rust 版本
+msrv = "1.85.0"
+# 是否允许在测试中使用 expect
+allow-expect-in-tests = false
+# 是否允许在测试中使用 unwrap
+allow-unwrap-in-tests = false
+# 是否允许在测试中使用 dbg!
+allow-dbg-in-tests = false
+# 是否允许在测试中使用 print!
+allow-print-in-tests = false
+# 函数参数数量阈值，超过此数量会警告
+too-many-arguments-threshold = 7
+# 类型复杂度阈值
+type-complexity-threshold = 250
+# Vec<Box> 大小阈值
+vec-box-size-threshold = 4096
+# 栈大小阈值
+stack-size-threshold = 512000
+# 详细位掩码阈值
+verbose-bit-mask-threshold = 1
+# 字面量表示阈值
+literal-representation-threshold = 2
+# include! 文件最大大小
+max-include-file-size = 1000000
+# trait 边界最大数量
+max-trait-bounds = 3
