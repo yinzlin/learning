@@ -20,33 +20,34 @@
 ### 2. 添加依赖
 
 1. 打开 `Cargo.toml` 文件
-2. 在 `[dependencies]` 部分添加 rand 依赖：
+2. 在 `[dependencies]` 部分添加 rand 依赖（使用 0.10 版本）：
    ```toml
    [dependencies]
-   rand = "0.8.5"
+   rand = "0.10"
    ```
 
 ### 3. 编写代码
 
 1. 打开 `src/main.rs` 文件
-2. 替换为以下代码：
+2. 替换为以下代码（使用 rand 0.10 版本的 API）：
    ```rust
    use std::io;
-   use rand::Rng;
-   
+   use rand::prelude::*;
+
    fn main() {
        println!("猜数字游戏");
-       
-       let secret_number = rand::thread_rng().gen_range(1..=100);
-       
+
+       let mut rng = rand::rng();
+       let secret_number = rng.random_range(1..=100);
+
        loop {
            println!("请输入你猜的数字（1-100）：");
-           
+
            let mut guess = String::new();
            io::stdin()
                .read_line(&mut guess)
                .expect("读取输入失败");
-           
+
            let guess: u32 = match guess.trim().parse() {
                Ok(num) => num,
                Err(_) => {
@@ -54,9 +55,9 @@
                    continue;
                }
            };
-           
+
            println!("你猜的数字是：{}", guess);
-           
+
            match guess.cmp(&secret_number) {
                std::cmp::Ordering::Less => println!("太小了！"),
                std::cmp::Ordering::Greater => println!("太大了！"),
@@ -86,10 +87,44 @@
 2. 根据提示调整猜测的数字
 3. 直到猜对为止
 
+## 关键知识点
+
+### rand 0.10 版本的使用
+
+rand 0.10 版本引入了新的 API 设计：
+
+1. **创建 RNG 实例**：
+   ```rust
+   let mut rng = rand::rng();
+   ```
+
+2. **生成指定范围的随机数**：
+   ```rust
+   let secret_number = rng.random_range(1..=100);
+   ```
+
+3. **生成指定类型的随机数**：
+   ```rust
+   let random_u32 = rng.random::<u32>();
+   ```
+
+4. **导入方式**：
+   ```rust
+   use rand::prelude::*;
+   ```
+
+### 与旧版本的区别
+
+| 旧版本 (0.8) | 新版本 (0.10) |
+|-------------|--------------|
+| `rand::thread_rng()` | `rand::rng()` |
+| `thread_rng().gen_range(1..=100)` | `rng.random_range(1..=100)` |
+| `use rand::Rng;` | `use rand::prelude::*;` |
+
 ## 所需资源
 - 终端
 - Rust 开发环境（已在步骤 1 中安装）
-- rand 依赖库
+- rand 0.10 依赖库
 
 ## 时间节点
 - **开始时间**：学习计划第 3 天
@@ -98,7 +133,7 @@
 ## 预期成果
 - 成功实现一个功能完整的猜数字游戏
 - 掌握 Rust 的基本输入输出操作
-- 学习随机数生成的使用
+- 学习随机数生成的使用（rand 0.10 版本）
 - 理解 Rust 的控制流和错误处理
 
 ## 优先级
@@ -110,7 +145,7 @@
 | 风险点 | 应对措施 |
 |-------|--------|
 | 依赖添加失败 | 检查网络连接，确保 Cargo 能够访问 crates.io |
-| 编译错误 | 检查代码语法和依赖版本 |
+| 编译错误 | 检查代码语法和依赖版本，确认使用 rand 0.10 的 API |
 | 运行时错误 | 检查输入处理逻辑 |
 
 ## 验证步骤
